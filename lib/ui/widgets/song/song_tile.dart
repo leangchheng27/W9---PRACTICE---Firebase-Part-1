@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../model/songs/song.dart';
 
 class SongTile extends StatelessWidget {
@@ -16,16 +15,23 @@ class SongTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final int mins = song.duration.inMinutes;
+
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(15)
+          borderRadius: BorderRadius.circular(15),
         ),
         child: ListTile(
           onTap: onTap,
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage(song.imageUrl),
+            radius: 24,
+          ),
           title: Text(song.title),
+          subtitle: Text('$mins mins'),
           trailing: Text(
             isPlaying ? "Playing" : "",
             style: TextStyle(color: Colors.amber),
