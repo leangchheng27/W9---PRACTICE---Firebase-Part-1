@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'view_model/library_view_model.dart';
+import '../../../data/repositories/artists/artist_repository.dart';
 import '../../../data/repositories/songs/song_repository.dart';
 import '../../states/player_state.dart';
-import 'widgets/library_content.dart';
+import './widgets/library_content.dart';
+import 'view_model/library_view_model.dart';
 
 class LibraryScreen extends StatelessWidget {
   const LibraryScreen({super.key});
@@ -12,10 +13,11 @@ class LibraryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => LibraryViewModel(
-        playerState: context.read<PlayerState>(),
         songRepository: context.read<SongRepository>(),
+        artistRepository: context.read<ArtistRepository>(),
+        playerState: context.read<PlayerState>(),
       ),
-      child: LibraryContent(),
+      child: const LibraryContent(),
     );
   }
 }
